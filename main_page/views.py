@@ -14,9 +14,6 @@ def main_page(request):
 
 def search_view(request):
     query = request.GET.get('query')
-    print('---------------------------------------------------------------------------------------------')
-    print(query)
-    print('---------------------------------------------------------------------------------------------')
     try:
         product = Product.objects.filter(search_name__icontains=query, market_place='store_77')[0]
     except:

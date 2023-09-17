@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+import scrapydo
+
+scrapydo.setup()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main_page.apps.MainPageConfig',
+    'store_parser',
 ]
 
 MIDDLEWARE = [
@@ -118,12 +122,3 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'main_page/static')]
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-SCRAPY_SETTINGS = {
-    'ITEM_PIPELINES': {
-        'main_page.pipelines.Store77Pipeline': 300,  # Путь к вашему пайплайну сохранения в базу данных
-    }}
-
-import django
-
-django.setup()

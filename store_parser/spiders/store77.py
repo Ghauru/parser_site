@@ -1,4 +1,4 @@
-import argparse
+from main_page.models import Product
 import scrapy
 from scrapy_splash import SplashRequest
 import re
@@ -7,20 +7,9 @@ import re
 class Store77Spider(scrapy.Spider):
     name = "store77"
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, url=None, *args, **kwargs):
         super().__init__(**kwargs)
-        self.url = kwargs.get('url')
-        # Остальные инициализации...
-
-    @classmethod
-    def from_crawler(cls, crawler, *args, **kwargs):
-        parser = argparse.ArgumentParser()
-        parser.add_argument('-u', '--url', type=str, help='URL to scrape')
-        args = parser.parse_args()  # Преобразуем Namespace в обычный объект args
-
-        spider = super().from_crawler(crawler, cls, *args, **kwargs)
-        spider.url = kwargs.get('url')
-        return spider
+        self.url = url
 
     def start_requests(self):
         yield SplashRequest(self.url, self.parse,
@@ -64,13 +53,6 @@ class Store77Spider(scrapy.Spider):
         image_link = re.findall(r"'(.*?)'", image_link)
         seller = 'store77'
         market_place = 'store77'
-        yield {
-            'name': name,
-            'price': price,
-            'specifies': specifies,
-            'link': link,
-            'image_url': image_link,
-            'seller': seller,
-            'market_place': market_place
-        }
-
+        product = Product(name=name, price=price, specifies=specifies, link=link, image_link=image_link, seller=seller,
+                          market_place=market_place)
+        product.save()

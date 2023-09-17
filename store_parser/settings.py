@@ -19,7 +19,7 @@ NEWSPIDER_MODULE = "store_parser.spiders"
 ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-# CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 32
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -97,3 +97,7 @@ DOWNLOADER_MIDDLEWARES = {'scrapy_splash.SplashCookiesMiddleware': 723, 'scrapy_
 SPIDER_MIDDLEWARES = {'scrapy_splash.SplashDeduplicateArgsMiddleware': 100, }
 
 FEED_URI = 'C://Users//rules//PycharmProjects//pythonProject2//output.json'
+
+ITEM_PIPELINES = {
+   'store_parser.pipelines.Store77Pipeline': 300,
+}
