@@ -52,28 +52,28 @@
         <div class="card h-100">
           <img src="https://img.artlebedev.ru/everything/citilink/logo/citilink-logo.gif" class="card-img-top" style="width: 80px;" alt="Sitilink">
           <div class="card-body">
-            <h5 class="card-title">{{ product.name }}</h5>
+            <h5 class="card-title">{{ item.name }}</h5>
             <ul class="list-group list-group-horizontal">
               <li class="list-group-item">
-                <a href="{{ product.image_link }}" style="margin-right: 5px;">
-                  <img src="{{ product.image_link }}" alt="Image" style="width: 100%; height: auto;">
+                <a href="{{ item.image_link }}" style="margin-right: 5px;">
+                  <img src="{{ item.image_link }}" alt="Image" style="width: 100%; height: auto;">
                 </a>
               </li>
               <li class="list-group-item">
                 <ul class="list-group list-group-vertical">
                   <li class="list-group-item">
-                    <p class="card-text-left">Цена: {{ product.price }} рублей.</p>
+                    <p class="card-text-left">Цена: {{ item.price }} рублей.</p>
                   </li>
                   <li class="list-group-item">
-                    <p class="card-text-left">Продавец: {{ product.seller }}</p>
+                    <p class="card-text-left">Продавец: {{ item.seller }}</p>
                   </li>
                   <li class="list-group-item">
-                    <a href="{{ product.link }}">Ссылка на товар</a>.
+                    <a href="{{ item.link }}">Ссылка на товар</a>.
                   </li>
                 </ul>
               </li>
               <li class="list-group-item">
-                Описание: {{ product.specifies }}
+                Описание: {{ item.specifies }}
               </li>
             </ul>
           </div>

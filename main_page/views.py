@@ -2,7 +2,7 @@ import threading
 
 from django.shortcuts import render
 from .models import Product
-from .scrapy_integration import main_parse
+from .scrapy_integration import main_parse, second_parse
 import scrapydo
 
 scrapydo.setup()
@@ -20,5 +20,10 @@ def search_view(request):
     except IndexError:
         main_parse(query)
         product = Product.objects.filter(search_name__icontains=query.lower(), market_place='store77')[0]
+    try:
+        item = Product.objects.filter(search_name__icontains=query.lower(), market_place='e2e4online')[0]
+    except IndexError:
+        second_parse(query)
+        item = Product.objects.filter(search_name__icontains=query.lower(), market_place='e2e4online')[0]
 
-    return render(request, 'main_page/home.html', {'product': product})
+    return render(request, 'main_page/home.html', {'product': product, 'item': item})
