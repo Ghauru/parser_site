@@ -1,5 +1,6 @@
 from store_parser.spiders.store77 import Store77Spider
 from store_parser.spiders.citilink import CitilinkSpider
+from store_parser.spiders.jpg import JPGSpider
 import scrapydo
 
 
@@ -16,3 +17,8 @@ def second_parse(url):
     url = 'https://e2e4online.ru/catalog/?search=' + '%20'.join(url.split())
     spider_cls = CitilinkSpider
     scrapydo.run_spider(spider_cls, url=url, search_name=search_name)
+
+
+def jpg_parse(url):
+    spider_cls = JPGSpider
+    scrapydo.run_spider(spider_cls, url=url)
