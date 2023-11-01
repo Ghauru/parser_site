@@ -31,11 +31,11 @@ class Store77Spider(scrapy.Spider):
         self.search_name = search_name
 
     def start_requests(self):
+        proxy = 'http://us-ca.proxymesh.com:31280'
         yield SplashRequest(self.url, callback=self.parse,
                             endpoint='render.html',
                             args={'wait': 5},
-                            meta={'search_name': self.search_name}
-                            )
+                            meta={'search_name': self.search_name, proxy: proxy})
 
     def parse(self, response):
         page_count = response.css('.pagination')[0]

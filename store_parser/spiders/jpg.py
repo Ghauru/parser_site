@@ -1,5 +1,6 @@
 import scrapy
 from scrapy_splash import SplashRequest
+import os
 
 
 class JPGSpider(scrapy.Spider):
@@ -10,25 +11,22 @@ class JPGSpider(scrapy.Spider):
         self.url = url
 
     def start_requests(self):
+        proxy = 'http://us-ca.proxymesh.com:31280'
         yield SplashRequest(
             self.url,
             callback=self.parse,
             endpoint='render.html',
             args={'wait': 5},
+            meta={proxy: proxy}
         )
 
     def parse(self, response):
         image_url = response.css('img::attr(src)').get()
-        if image_url:
-            yield SplashRequest(
-                image_url,
-                callback=self.save_image,
-                endpoint='render.png',
-                args={'wait': 5},
-            )
+        folder_path = 'C:/Users/rules/PycharmProjects/pythonProject2/media/full/'
+        file_names = os.listdir(folder_path)
 
-    def save_image(self, response):
-        filename = 'C://Users//rules//PycharmProjects//pythonProject2//main_page//static//pictures//image.jpg'
-        with open(filename, 'wb') as f:
-            f.write(response.body)
-        self.log('Image saved as %s' % filename)
+        for file_name in file_names:
+            file_path = os.path.join(folder_path, file_name)
+            os.remove(file_path)
+        if image_url:
+            yield {'image_urls': [image_url]}

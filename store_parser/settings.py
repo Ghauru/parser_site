@@ -61,10 +61,10 @@ CONCURRENT_REQUESTS = 32
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    "store_parser.pipelines.StoreParserPipeline": 300,
-# }
-
+ITEM_PIPELINES = {
+    'scrapy.pipelines.images.ImagesPipeline': 1,
+}
+IMAGES_STORE = 'C:/Users/rules/PycharmProjects/pythonProject2/media'
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
 # AUTOTHROTTLE_ENABLED = True
@@ -95,3 +95,9 @@ SPLASH_URL = 'http://localhost:8050'
 DOWNLOADER_MIDDLEWARES = {'scrapy_splash.SplashCookiesMiddleware': 723, 'scrapy_splash.SplashMiddleware': 725,
                           'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810, }
 SPIDER_MIDDLEWARES = {'scrapy_splash.SplashDeduplicateArgsMiddleware': 100, }
+
+PROXY_ENABLED = True
+PROXY_HOST = 'us-ca.proxymesh.com'
+PROXY_PORT = 31280
+PROXY_USER = 'xxx'
+PROXY_PASS = 'xxx'
